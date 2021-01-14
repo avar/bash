@@ -704,6 +704,11 @@ pipeline, unless the @code{pipefail} option is enabled
 If @code{pipefail} is enabled, the pipeline's return status is the
 value of the last (rightmost) command to exit with a non-zero status,
 or zero if all commands exit successfully.
+
+As with @code{set -e} the @code{SIGPIPE} exit status is treated as a
+successful exit status, unless bash is built without
+@code{DONT_REPORT_SIGPIPE}.
+
 If the reserved word @samp{!} precedes the pipeline, the
 exit status is the logical negation of the exit status as described
 above.

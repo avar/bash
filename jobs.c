@@ -2851,8 +2851,14 @@ raw_job_exit_status (job)
       p = jobs[job]->pipe;
       do
 	{
-	  if (WSTATUS (p->status) != EXECUTION_SUCCESS)
-	    fail = WSTATUS(p->status);
+	  if (WSTATUS (p->status) != EXECUTION_SUCCESS
+#if defined (DONT_REPORT_SIGPIPE)
+              && WTERMSIG (p->status) != SIGPIPE
+#endif
+              )
+            {
+              fail = WSTATUS(p->status);
+            }
 	  p = p->next;
 	}
       while (p != jobs[job]->pipe);

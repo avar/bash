@@ -63,6 +63,9 @@ set -o pipefail
 true | $bintrue | false
 echo $? -- ${PIPESTATUS[@]}
 
+yes | head -n 1 | true
+echo $? -- ${PIPESTATUS[@]}
+
 true | binfalse | true
 echo $? -- ${PIPESTATUS[@]}
 set +o pipefail
